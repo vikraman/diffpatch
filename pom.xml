@@ -3,17 +3,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>com.sksamuel</groupId>
-        <artifactId>superpom</artifactId>
-        <version>1.0.3</version>
-    </parent>
-
     <groupId>com.sksamuel.diff</groupId>
     <artifactId>diff</artifactId>
-    <version>1.1.9</version>
+    <version>1.1.10</version>
     <name>diff</name>
-    <description>The Diff Match and Patch libraries offer robust algorithms to perform the operations required for synchronizing plain text</description>
+    <description>The Diff Match and Patch libraries offer robust algorithms to perform the operations required for synchronizing plain
+        text
+    </description>
     <packaging>jar</packaging>
     <url>https://github.com/sksamuel/diffpatch</url>
 
@@ -49,7 +45,25 @@
             <url>http://oss.sonatype.org/content/repositories/releases/</url>
         </repository>
     </repositories>
-    
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <compiler.version.source>1.7</compiler.version.source>
+        <compiler.version.target>1.7</compiler.version.target>
+
+        <maven.plugin.resources.version>2.6</maven.plugin.resources.version>
+        <maven.plugin.compiler.version>3.1</maven.plugin.compiler.version>
+        <maven.plugin.dependency.version>2.7</maven.plugin.dependency.version>
+        <maven.plugin.gpg.version>1.4</maven.plugin.gpg.version>
+        <maven.plugin.jar.version>2.4</maven.plugin.jar.version>
+        <maven.plugin.javadoc.version>2.9</maven.plugin.javadoc.version>
+        <maven.plugin.release.version>2.3.2</maven.plugin.release.version>
+        <maven.plugin.surefire.version>2.14.1</maven.plugin.surefire.version>
+        <maven.plugin.source.version>2.2.1</maven.plugin.source.version>
+    </properties>
+
     <profiles>
         <profile>
             <id>release</id>
@@ -58,7 +72,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.1</version>
+                        <version>${maven.plugin.gpg.version}</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -94,17 +108,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>${maven.plugin.resources.version}</version>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                    <nonFilteredFileExtensions>
-                        <nonFilteredFileExtension>pdf</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>swf</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>jpeg</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>png</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>ks</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>jks</nonFilteredFileExtension>
-                    </nonFilteredFileExtensions>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
