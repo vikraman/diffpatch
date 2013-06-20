@@ -11,7 +11,7 @@
 
     <groupId>com.sksamuel.diff</groupId>
     <artifactId>diff</artifactId>
-    <version>1.1.10</version>
+    <version>1.1.11</version>
     <name>diff</name>
     <description>The Diff Match and Patch libraries offer robust algorithms to perform the operations required for synchronizing plain
         text
@@ -56,8 +56,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <compiler.version.source>1.7</compiler.version.source>
-        <compiler.version.target>1.7</compiler.version.target>
+        <compiler.version.source>1.6</compiler.version.source>
+        <compiler.version.target>1.6</compiler.version.target>
 
         <maven.plugin.resources.version>2.6</maven.plugin.resources.version>
         <maven.plugin.compiler.version>3.1</maven.plugin.compiler.version>
