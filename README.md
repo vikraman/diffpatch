@@ -20,14 +20,14 @@ Maven:
 <dependency>
     <groupId>com.sksamuel.diff</groupId>
     <artifactId>diff</artifactId>
-    <version>1.1.10</version>
+    <version>1.1.11</version>
 </dependency>
 ```
 
 If using SBT then you want:
 
 ```
-libraryDependencies += "com.sksamuel.diff" % "diff" % "1.1.10"
+libraryDependencies += "com.sksamuel.diff" % "diff" % "1.1.11"
 ```
 
 ## License
