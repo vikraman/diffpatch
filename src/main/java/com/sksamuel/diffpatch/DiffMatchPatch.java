@@ -299,7 +299,7 @@ public class DiffMatchPatch {
   private LinkedList<Diff> diff_lineMode(String text1, String text2,
                                          long deadline) {
     // Scan the text on a line-by-line basis first.
-    LinesToCharsResult b = diff_linesToChars(text1, text2);
+    LinesToCharsResult b = diff_linesToChars(text1, text2, "\n");
     text1 = b.chars1;
     text2 = b.chars2;
     List<String> linearray = b.lineArray;
@@ -513,7 +513,7 @@ public class DiffMatchPatch {
    *     the List of unique strings.  The zeroth element of the List of
    *     unique strings is intentionally blank.
    */
-  protected LinesToCharsResult diff_linesToChars(String text1, String text2) {
+  protected LinesToCharsResult diff_linesToChars(String text1, String text2, String delimeters) {
     List<String> lineArray = new ArrayList<String>();
     Map<String, Integer> lineHash = new HashMap<String, Integer>();
     // e.g. linearray[4] == "Hello\n"
@@ -523,9 +523,30 @@ public class DiffMatchPatch {
     // So we'll insert a junk entry to avoid generating a null character.
     lineArray.add("");
 
-    String chars1 = diff_linesToCharsMunge(text1, lineArray, lineHash);
-    String chars2 = diff_linesToCharsMunge(text2, lineArray, lineHash);
+    String chars1 = diff_linesToCharsMunge(text1, lineArray, lineHash, delimeters);
+    String chars2 = diff_linesToCharsMunge(text2, lineArray, lineHash, delimeters);
     return new LinesToCharsResult(chars1, chars2, lineArray);
+  }
+
+  /**
+   * Return the lowest index of one of the delimeters in the string.
+   * @param text String to search in.
+   * @param delimeters Set of delimeters.
+   * @param startPos Index after which to start searching.
+   */
+  private int indexOfAny(String text, String delimeters, int startPos) {
+
+    int lowestIndex = text.length() + 1;
+
+    for(char delim : delimeters.toCharArray()) {
+
+      int foundIndex = text.indexOf(delim, startPos);
+      if (foundIndex != -1 && lowestIndex > foundIndex)
+        lowestIndex = foundIndex;
+    }
+
+    if (lowestIndex == text.length() + 1) return -1;
+    else return lowestIndex;
   }
 
   /**
@@ -537,7 +558,7 @@ public class DiffMatchPatch {
    * @return Encoded string.
    */
   private String diff_linesToCharsMunge(String text, List<String> lineArray,
-                                        Map<String, Integer> lineHash) {
+                                        Map<String, Integer> lineHash, String delimeters) {
     int lineStart = 0;
     int lineEnd = -1;
     String line;
@@ -546,7 +567,7 @@ public class DiffMatchPatch {
     // text.split('\n') would would temporarily double our memory footprint.
     // Modifying text would create many large strings to garbage collect.
     while (lineEnd < text.length() - 1) {
-      lineEnd = text.indexOf('\n', lineStart);
+      lineEnd = indexOfAny(text, delimeters, lineStart);
       if (lineEnd == -1) {
         lineEnd = text.length() - 1;
       }
