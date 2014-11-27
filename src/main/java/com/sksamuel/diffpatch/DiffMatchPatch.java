@@ -93,6 +93,18 @@ public class DiffMatchPatch {
       this.chars2 = chars2;
       this.lineArray = lineArray;
     }
+
+    public String getChars1() {
+      return chars1;
+    }
+
+    public String getChars2() {
+      return chars2;
+    }
+
+    public List<String> getLineArray() {
+      return lineArray;
+    }
   }
 
 
