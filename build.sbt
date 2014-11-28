@@ -2,7 +2,7 @@ name := "diff"
 
 organization := "com.sksamuel.diff"
 
-version := "1.1.11"
+version := "1.1.12-SNAPSHOT"
 
 crossPaths := false
 

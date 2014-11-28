@@ -11,7 +11,7 @@
 
     <groupId>com.sksamuel.diff</groupId>
     <artifactId>diff</artifactId>
-    <version>1.1.11</version>
+    <version>1.1.12-SNAPSHOT</version>
     <name>diff</name>
     <description>The Diff Match and Patch libraries offer robust algorithms to perform the operations required for synchronizing plain
         text
