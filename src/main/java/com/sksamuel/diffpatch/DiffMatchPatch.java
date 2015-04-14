@@ -862,10 +862,10 @@ public class DiffMatchPatch {
     diff_cleanupSemanticLossless(diffs);
 
     // Find any overlaps between deletions and insertions.
-    // e.g: <del>abcxxx</del><ins>xxxdef</ins>
-    //   -> <del>abc</del>xxx<ins>def</ins>
-    // e.g: <del>xxxabc</del><ins>defxxx</ins>
-    //   -> <ins>def</ins>xxx<del>abc</del>
+    // e.g: &lt;del&gt;abcxxx&lt;/del&gt;&lt;ins&gt;xxxdef&lt;/ins&gt;
+    //   -&gt; &lt;del&gt;abc&lt;/del&gt;xxx&lt;ins&gt;def&lt;/ins&gt;
+    // e.g: &lt;del&gt;xxxabc&lt;/del&gt;&lt;ins&gt;defxxx&lt;/ins&gt;
+    //   -&gt; &lt;ins&gt;def&lt;/ins&gt;xxx&lt;del&gt;abc&lt;/del&gt;
     // Only extract an overlap if it is as big as the edit ahead or behind it.
     pointer = diffs.listIterator();
     Diff prevDiff = null;
@@ -923,7 +923,7 @@ public class DiffMatchPatch {
   /**
    * Look for single edits surrounded on both sides by equalities
    * which can be shifted sideways to align the edit to a word boundary.
-   * e.g: The c<ins>at c</ins>ame. -> The <ins>cat </ins>came.
+   * e.g: The c&lt;ins&gt;at c&lt;/ins&gt;ame. -&gt; The &lt;ins&gt;cat &lt;/ins&gt;came.
    * @param diffs LinkedList of Diff objects.
    */
   public void diff_cleanupSemanticLossless(LinkedList<Diff> diffs) {
@@ -1271,7 +1271,7 @@ public class DiffMatchPatch {
     /*
      * Second pass: look for single edits surrounded on both sides by equalities
      * which can be shifted sideways to eliminate an equality.
-     * e.g: A<ins>BA</ins>C -> <ins>AB</ins>AC
+     * e.g: A&lt;ins&gt;BA&lt;/ins&gt;C -&gt; &lt;ins&gt;AB&lt;/ins&gt;AC
      */
     boolean changes = false;
     // Create a new iterator at the start.
@@ -1322,7 +1322,7 @@ public class DiffMatchPatch {
   /**
    * loc is a location in text1, compute and return the equivalent location in
    * text2.
-   * e.g. "The cat" vs "The big cat", 1->1, 5->8
+   * e.g. "The cat" vs "The big cat", 1-&gt;1, 5-&gt;8
    * @param diffs LinkedList of Diff objects.
    * @param loc Location within text1.
    * @return Location within text2.
@@ -1448,7 +1448,7 @@ public class DiffMatchPatch {
   /**
    * Crush the diff into an encoded string which describes the operations
    * required to transform text1 into text2.
-   * E.g. =3\t-2\t+ing  -> Keep 3 chars, delete 2 chars, insert 'ing'.
+   * E.g. =3\t-2\t+ing  -&gt; Keep 3 chars, delete 2 chars, insert 'ing'.
    * Operations are tab-separated.  Inserted text is escaped using %xx notation.
    * @param diffs Array of Diff objects.
    * @return Delta text.
@@ -1827,7 +1827,7 @@ public class DiffMatchPatch {
    * @param text2 Ignored.
    * @param diffs Array of Diff objects for text1 to text2.
    * @return LinkedList of Patch objects.
-   * @deprecated Prefer patch_make(String text1, LinkedList<Diff> diffs).
+   * @deprecated Prefer patch_make(String text1, LinkedList&lt;Diff&gt; diffs).
    */
   public LinkedList<Patch> patch_make(String text1, String text2,
       LinkedList<Diff> diffs) {
@@ -2481,7 +2481,7 @@ public class DiffMatchPatch {
    * unescaped.  But this is ok because it is only called with the output of
    * URLEncoder.encode which returns uppercase hex.
    *
-   * Example: "%3F" -> "?", "%24" -> "$", etc.
+   * Example: "%3F" -&gt; "?", "%24" -&gt; "$", etc.
    *
    * @param str The string to escape.
    * @return The escaped string.
