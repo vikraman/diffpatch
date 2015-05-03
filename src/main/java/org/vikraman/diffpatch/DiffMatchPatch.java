@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-package com.sksamuel.diffpatch;
+package org.vikraman.diffpatch;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
